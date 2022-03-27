@@ -39,7 +39,7 @@ public enum PermalinkProperties implements PropertyEnum {
      * Archives prefix.
      * such as: /archives
      */
-    ARCHIVES_PREFIX("archives_prefix", String.class, "archives"),
+    ARCHIVES_PREFIX("archives_prefix", String.class, "article"),
 
     /**
      * Sheet prefix

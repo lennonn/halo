@@ -101,6 +101,7 @@ class InMemoryCacheStoreTest {
     void toMapTest() {
         InMemoryCacheStore localCacheStore = new InMemoryCacheStore();
         localCacheStore.clear();
+        localCacheStore.delete("options ");
         String key1 = "test_key_1";
         String value1 = "test_value_1";
 

@@ -117,7 +117,7 @@ public class ContentContentController {
     public String content(@PathVariable("prefix") String prefix,
         @RequestParam(value = "token", required = false) String token,
         Model model) {
-        if (optionService.getArchivesPrefix().equals(prefix)) {
+        if (optionService.getArchivesPrefix().equals(prefix)||optionService.getArchivesPrefix().equals("article/website/detail")) {
             return postModel.archives(1, model);
         }
         if (optionService.getCategoriesPrefix().equals(prefix)) {
@@ -234,6 +234,21 @@ public class ContentContentController {
 
         throw buildPathNotFoundException();
     }
+
+    @GetMapping("article/website/detail/{slug}")
+    public String customContent(
+        @PathVariable("slug") String slug,
+        @RequestParam(value = "token", required = false) String token,
+        Model model) {
+        PostPermalinkType postPermalinkType = optionService.getPostPermalinkType();
+        if (postPermalinkType.equals(PostPermalinkType.DEFAULT)) {
+            Post post = postService.getBySlug(slug);
+            return postModel.content(post, token, model);
+        }
+
+        throw buildPathNotFoundException();
+    }
+
 
     @GetMapping("{year:\\d+}/{month:\\d+}/{day:\\d+}/{slug}")
     public String content(@PathVariable("year") Integer year,
